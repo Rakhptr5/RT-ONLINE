@@ -1,4 +1,4 @@
-package com.example.venturo_core
+package com.venturo.rtonline
 
 import io.flutter.embedding.android.FlutterActivity
 

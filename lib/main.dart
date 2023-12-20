@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:flutter_localizations/flutter_localizations.dart'; // tambahkan import ini
 import 'package:venturo_core/configs/routes/route.dart';
 
 import 'configs/pages/page.dart';
@@ -15,7 +16,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Screen Util Init berdasarkan ukuran iphone xr
     return ScreenUtilInit(
       designSize: const Size(414, 896),
       minTextAdapt: true,
@@ -30,8 +30,12 @@ class MyApp extends StatelessWidget {
             Locale('en', 'US'),
             Locale('id'),
           ],
-          // initialBinding: , Jika memiliki global bindding
-          initialRoute: Routes.splashRoute,
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          initialRoute: Routes.invitationRoute,
           theme: themeLight,
           defaultTransition: Transition.native,
           getPages: Pages.pages,
