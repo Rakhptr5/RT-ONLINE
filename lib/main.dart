@@ -24,18 +24,19 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           title: 'Venturo Core',
           debugShowCheckedModeBanner: false,
-          locale: const Locale('id'),
-          fallbackLocale: const Locale('id'),
-          supportedLocales: const [
-            Locale('en', 'US'),
-            Locale('id'),
-          ],
-          localizationsDelegates: [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          initialRoute: Routes.invitationRoute,
+//locale: const Locale('id'),
+          //fallbackLocale: const Locale('id'),
+          //supportedLocales: const [
+          //Locale('en', 'US'),
+          //Locale('id'),
+          // ],
+          //localizationsDelegates: [
+          //  GlobalMaterialLocalizations.delegate,
+          //  GlobalWidgetsLocalizations.delegate,
+          //  GlobalCupertinoLocalizations.delegate,
+          //],
+          initialRoute: Routes
+              .signInRoute, //untuk halaman invitation pindah ke invitationRoute
           theme: themeLight,
           defaultTransition: Transition.native,
           getPages: Pages.pages,
