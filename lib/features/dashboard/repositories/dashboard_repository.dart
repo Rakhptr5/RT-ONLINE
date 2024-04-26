@@ -1,4 +1,4 @@
-import '../constants/dashboard_api_constant.dart';
+import 'package:venturo_core/features/dashboard/constants/dashboard_api_constant.dart';
 
 class DashboardRepository {
   DashboardRepository._();

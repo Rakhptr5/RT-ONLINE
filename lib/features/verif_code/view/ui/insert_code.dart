@@ -4,12 +4,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:pinput/pinput.dart';
+import 'package:venturo_core/shared/styles/google_text_style.dart';
 import '../../../../configs/routes/route.dart';
 
-class VerifView extends StatelessWidget {
-  const VerifView({Key? key});
+class VerifView extends StatefulWidget {
+  VerifView({Key? key}) : super(key: key);
 
+  @override
+  _VerifViewState createState() => _VerifViewState();
+}
+
+class _VerifViewState extends State<VerifView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,7 +118,7 @@ class VerifView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10),
-                  buildVerificationCode(),
+                  textcode(),
                   SizedBox(height: 20),
                   buildVerifyButton(),
                 ],
@@ -126,33 +132,25 @@ class VerifView extends StatelessWidget {
     );
   }
 
-  Widget buildVerificationCode() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        for (int i = 0; i < 4; i++)
-          Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: 20), // Sesuaikan lebar jarak di sini
-            child: Column(
-              children: [
-                Text(
-                  '0',
-                  style: TextStyle(
-                    fontFamily: 'PoppinsSemi',
-                    fontSize: 24,
-                    color: Colors.black,
-                  ),
-                ),
-                Container(
-                  width: 30,
-                  height: 2,
-                  color: Colors.black,
-                ),
-              ],
+  Widget textcode() {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(6),
+        child: Pinput(
+          length: 4,
+          defaultPinTheme: PinTheme(
+            width: 56,
+            height: 56,
+            textStyle: NunitoTextStyle.fw800.copyWith(fontSize: 30),
+            decoration: BoxDecoration(
+              border: Border(bottom: BorderSide(color: Colors.black, width: 2)),
             ),
           ),
-      ],
+          onChanged: (value) {
+            setState(() {});
+          },
+        ),
+      ),
     );
   }
 
@@ -240,7 +238,7 @@ class VerifView extends StatelessWidget {
               width: 30,
               height: 30,
               child: Stack(children: [
-                Positioned(child: Image.asset('assets/Gram.png'))
+                Positioned(child: Image.asset('assets/images/Gram.png'))
               ]),
             ),
           ),
@@ -251,7 +249,7 @@ class VerifView extends StatelessWidget {
               width: 66,
               height: 9,
               child: Stack(children: [
-                Positioned(child: Image.asset('assets/Text.png'))
+                Positioned(child: Image.asset('assets/images/Text.png'))
               ]),
             ),
           ),

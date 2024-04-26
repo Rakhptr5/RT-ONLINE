@@ -1,239 +1,140 @@
-import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:venturo_core/features/dashboard/controllers/dashboard_controller.dart';
+import 'package:venturo_core/shared/styles/google_text_style.dart';
 
-class DashboardView extends StatelessWidget {
-  const DashboardView({Key? key});
+class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 242, 242, 242),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 180,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Color(0xFF6EE2F5), Color(0xFF6454F0)],
-                    ),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(24),
-                      bottomRight: Radius.circular(24),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0x19000000),
-                        blurRadius: 8,
-                        offset: Offset(4, 3),
-                        spreadRadius: 0,
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 30, top: 40),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CircleAvatar(
-                          radius: 33,
-                          backgroundImage: AssetImage('assets/udeng.jpeg'),
-                        ),
-                        SizedBox(width: 16),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(4, 8, 0, 0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Krisna Maulana',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 22,
-                                  fontFamily: 'PoppinsSemi',
-                                ),
-                              ),
-                              Text(
-                                'Perumahan Griya Shanta C-23',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontFamily: 'PoppinsSemi',
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 140,
-                  left: 20,
-                  right: 20,
-                  child: Container(
-                    width: double.infinity,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0x19000000),
-                          blurRadius: 4,
-                          offset: Offset(0, 2),
-                          spreadRadius: 0,
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(13, 9, 0, 0),
-                              child: Text(
-                                'Saldo Kas RT',
-                                style: TextStyle(
-                                  color: Color(0xFF1F1F1F),
-                                  fontSize: 14,
-                                  fontFamily: 'NunitoBold',
-                                  height: 0,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(13, 4, 0, 0),
-                              child: Text(
-                                'Rp.10.000.000',
-                                style: TextStyle(
-                                  color: Color(0xFF1F1F1F),
-                                  fontSize: 22,
-                                  fontFamily: 'NunitoExt',
-                                  height: 0,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ],
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            // Add the action for the button here
-                            print('Button Lihat Ditekan!');
-                          },
-                          child: Center(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(bottom: 35, left: 25),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                    colors: [
-                                      Color(0xFF6EE2F5),
-                                      Color(0xFF6454F0)
-                                    ],
-                                  ),
-                                  borderRadius: BorderRadius.circular(11),
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 17,
-                                  vertical: 2,
-                                ),
-                                child: Text(
-                                  'Lihat',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontFamily: 'NunitoExt',
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 5),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/Vector.png',
-                                    width: 15,
-                                    height: 60,
-                                    color:
-                                        ui.Color.fromARGB(255, 111, 111, 111),
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Jumlah Rumah',
-                                        style: TextStyle(
-                                          color: Color(0xFF1F1F1F),
-                                          fontSize: 12,
-                                          fontFamily: 'NunitoExt',
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 7),
-                                        child: Text(
-                                          '50',
-                                          style: TextStyle(
-                                            color: Color(0xFF1F1F1F),
-                                            fontSize: 22,
-                                            fontFamily: 'NunitoExt',
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            CarouselSlider(
-              options: CarouselOptions(
-                autoPlay: true,
-                height: 200,
-                aspectRatio: 2.0,
-                enlargeCenterPage: true,
-              ),
-              items: [
-                Image.asset('assets/Frame.png'),
-                Image.asset('assets/Frame.png'),
-                Image.asset('assets/Frame.png'),
-              ],
-            ),
-            SizedBox(height: 20),
-            SizedBox(height: 20),
-            SizedBox(height: 20),
-          ],
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        backgroundColor: const Color(0xffeff0f5),
+        body: Obx(
+          () => DashboardController
+              .to.main[DashboardController.to.currentIndex.value],
         ),
+        bottomNavigationBar: Obx(
+          () => Container(
+            height: 80.w,
+            decoration: const ShapeDecoration(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
+              shadows: [
+                BoxShadow(
+                  color: Color(0x26000000),
+                  blurRadius: 8,
+                  offset: Offset(0, -4),
+                  spreadRadius: 0,
+                )
+              ],
+            ),
+            child: Material(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(8.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: _buildNavItem(
+                          0, DashboardController.to.icon, 'Beranda'),
+                    ),
+                    Expanded(
+                      child: _buildNavItem(
+                          1, DashboardController.to.icon, 'Tata Tertib'),
+                    ),
+                    Expanded(
+                      child: _buildNavItem(
+                          2, DashboardController.to.icon, 'Iuran Warga'),
+                    ),
+                    Expanded(
+                      child: _buildNavItem(
+                          3, DashboardController.to.icon, 'Struktur RT'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavItem(int index, List<List<String>> icon, String title) {
+    String normalIcon =
+        icon[index][0]; // Menggunakan indeks 0 untuk normal icon
+    String filledIcon =
+        icon[index][1]; // Menggunakan indeks 1 untuk filled icon
+
+    return GestureDetector(
+      onTap: () {
+        // Aksi yang dijalankan saat item navigasi ditekan
+        DashboardController.to.changePage(index);
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Icon
+          (DashboardController.to.currentIndex.value == index)
+              ? ShaderMask(
+                  blendMode: BlendMode.srcIn,
+                  shaderCallback: (Rect bounds) {
+                    return const LinearGradient(
+                      colors: [
+                        Color(0xFF6EE2F5),
+                        Color(0xFF6454F0),
+                      ],
+                    ).createShader(bounds);
+                  },
+                  child: ImageIcon(
+                    AssetImage(filledIcon),
+                  ),
+                )
+              : ImageIcon(
+                  AssetImage(normalIcon),
+                  color: Colors.grey,
+                ),
+
+          (DashboardController.to.currentIndex.value == index)
+              ?
+              // Text
+              ShaderMask(
+                  blendMode: BlendMode.srcIn,
+                  shaderCallback: (bounds) {
+                    return const LinearGradient(
+                      colors: [
+                        Color(0xFF6EE2F5),
+                        Color(0xFF6454F0),
+                      ],
+                    ).createShader(bounds);
+                  },
+                  child: Text(
+                    title,
+                    style: NunitoTextStyle.fw600.copyWith(
+                      fontSize: 10.sp,
+                    ),
+                  ),
+                )
+              : Text(
+                  title,
+                  style: NunitoTextStyle.fw600.copyWith(
+                    color: Colors.grey,
+                    fontSize: 10.sp,
+                  ),
+                ),
+        ],
       ),
     );
   }

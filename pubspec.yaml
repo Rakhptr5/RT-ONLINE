@@ -31,13 +31,27 @@ dependencies:
   carousel_slider: ^4.2.1
   change_app_package_name: ^1.1.0
   cupertino_icons: ^1.0.2
+  dots_indicator: ^3.0.0
   fast_rsa: ^3.6.1
+  file_picker: ^8.0.0+1
   flutter:
     sdk: flutter
   flutter_localization: ^0.1.14
   flutter_screenutil: ^5.9.0
+  flutter_slidable: ^3.0.1
+  flutter_svg: ^2.0.9
   get: ^4.6.5
+  getwidget: ^4.0.0
   google_fonts: ^6.1.0
+  http: ^1.2.0
+  image_picker: ^0.8.4+3
+  intl: ^0.18.1
+  photo_view: ^0.14.0
+  pinput: ^2.1.0
+  qr_flutter: ^4.1.0
+  shared_preferences: ^2.2.2
+  table_calendar: ^3.0.0
+  url_launcher: ^6.2.6
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -55,7 +69,85 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/
+
+    - assets/..
+    - assets/images/..
+    - images/..
+    - assets/images/Que.jpeg
+    - assets/images/udeng.jpeg
+    - assets/images/apalahu.jpg
+    - assets/images/Text.png
+    - assets/images/file.png
+    - assets/images/eye.png
+    - assets/images/History.png
+    - assets/images/person_outline.png
+    - assets/images/trash_outline.png
+    - assets/images/pembayaran.jpg
+    - assets/images/bukti.png
+    - assets/images/check_circle.png
+    - assets/images/kotak_icon.png
+    - assets/images/laporan.png
+    - assets/images/arrow_right.png
+    - assets/images/edit.png
+    - assets/images/riwayat.png
+    - assets/images/semen.png
+    - assets/images/imagesdetail.png
+    - assets/images/qris.png
+    - assets/images/Button.png
+    - assets/images/BCA.png
+    - assets/images/Dropdown.png
+    - assets/images/Mandiri.png
+    - assets/images/Option.png
+    - assets/images/textu.png
+    - assets/images/Legends.png
+    - assets/images/framess.png
+    - assets/images/cross.png
+    - assets/images/imagus.png
+    - assets/images/checkmark.png
+    - assets/images/ic_eye_on.png
+    - assets/images/logo_rt_horizontal.png
+    - assets/images/ic_alert_triangle.png
+    - assets/images/ic_settings_2.png
+    - assets/images/paper_pen.png
+    - assets/images/money_red.png
+    - assets/images/money_green.png
+    - assets/images/ic_announcement.png
+    - assets/images/ic_pin.png
+    - assets/images/ic_home_fill.png
+    - assets/images/ic_iuran_fill.png
+    - assets/images/ic_struktur_fill.png
+    - assets/images/ic_tertib_fill.png
+    - assets/images/ic_home.png
+    - assets/images/ic_iuran.png
+    - assets/images/ic_struktur.png
+    - assets/images/ic_tertib.png
+    - assets/images/ic_whatsapp.png
+    - assets/images/empty.png
+    - assets/images/empty_tata_tertib.png
+    - assets/images/empty_struktur.png
+    - assets/images/empty_iuran.png
+    - assets/images/empty_informasi.png
+    - assets/images/empty_data_warga.png
+    - assets/images/empty_pembayaran.png
+    - assets/images/ic_arrow_ios_down.png
+    - assets/images/ic_arrow_ios_up.png
+    - assets/images/ic_arrow_ios_right.png
+    - assets/images/ic_arrow_ios_left.png
+    - assets/images/ic_calendar.png
+    - assets/images/ic_camera_fill.png
+    - assets/images/ic_edit.png
+    - assets/images/ic_image.png
+    - assets/images/ic_file_text_fill.png
+    - assets/images/ic_person_fill.png
+    - assets/images/ic_unlock_fill.png
+    - assets/images/camera.svg
+    - assets/images/file_text.svg
+    - assets/images/Gram.png
+    - assets/images/Status.png
+    - assets/images/ic_filter.svg
+    - assets/images/checkmark_circle_fill.svg
+    - assets/images/logo_rt_online_horizontal.svg
+
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

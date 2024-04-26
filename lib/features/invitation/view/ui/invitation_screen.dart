@@ -1,29 +1,57 @@
 // invite_view.dart
 
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart' hide Response;
+import 'package:http/http.dart';
 import 'package:venturo_core/configs/routes/route.dart';
+import 'package:venturo_core/features/admin_dashboard/view/ui/admin_dashboard_screen.dart';
+import 'package:venturo_core/features/sign_in/view/ui/sign_in_screen.dart';
+import 'package:venturo_core/shared/styles/google_text_style.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class InviteView extends StatelessWidget {
-  const InviteView({Key? key});
+class InviteView extends StatefulWidget {
+  InviteView({Key? key}) : super(key: key);
 
+  @override
+  _InviteViewState createState() => _InviteViewState();
+}
+
+TextEditingController nameController = TextEditingController();
+
+TextEditingController handphoneController = TextEditingController();
+TextEditingController passwordController = TextEditingController();
+void invitation(String phone_number, String password) async {
+  try {
+    // Remove any non-numeric characters from the phone number
+
+    String url = 'https://wa.me/$phone_number?text=$password';
+    if (!await launchUrl(Uri.parse(url))) {
+      throw Exception('Could not launch $url');
+    }
+  } catch (e) {
+    print('Error: ${e.toString()}');
+  }
+}
+
+class _InviteViewState extends State<InviteView> {
+  var phone = '';
+  var passMessage = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 242, 242, 242),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
               width: double.infinity,
-              height: 250,
+              height: 230,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                  begin: Alignment(-1.3, -1),
+                  end: Alignment(1, 0.44),
                   colors: [Color(0xFF6EE2F5), Color(0xFF6454F0)],
                 ),
                 borderRadius: BorderRadius.only(
@@ -73,111 +101,169 @@ class InviteView extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 7),
-            Padding(
-              padding: const EdgeInsets.all(16),
+            SizedBox(height: 35),
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Tambahkan widget untuk foto dan label C-23 di atas widget Nama
-                  Container(
-                    width: 170,
-                    height: 170,
-                    padding: const EdgeInsets.all(8),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 134,
-                          decoration: ShapeDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('assets/udeng.jpeg'),
-                              fit: BoxFit.fill,
+                  Center(
+                    child: Container(
+                      width: 170,
+                      height: 190,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 134,
+                            decoration: ShapeDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/udeng.jpeg'),
+                                fit: BoxFit.fill,
+                              ),
+                              shape: CircleBorder(),
                             ),
-                            shape: CircleBorder(),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                  SizedBox(height: 2),
-                  buildTextField('Nama', TextInputType.text),
-                  SizedBox(height: 10),
-                  buildTextField('No. Handphone', TextInputType.phone),
-                  SizedBox(height: 10),
-                  buildTextField('Password', TextInputType.visiblePassword,
-                      isPassword: true),
+                  Text(
+                    "Nama",
+                    style: NunitoTextStyle.fw800.copyWith(fontSize: 16),
+                  ),
+                  5.verticalSpace,
+                  Container(
+                    width: 380,
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6)),
+                      shadows: [
+                        BoxShadow(
+                          color: Color(0x19000000),
+                          blurRadius: 8,
+                          offset: Offset(4, 3),
+                          spreadRadius: 0,
+                        )
+                      ],
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    child: TextField(
+                      controller: nameController,
+                      decoration: InputDecoration(
+                        hintText: 'Masukan Nama',
+                        hintStyle: NunitoTextStyle.fw400,
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  10.verticalSpace,
+                  Text(
+                    "No. Handphone",
+                    style: NunitoTextStyle.fw800.copyWith(fontSize: 16),
+                  ),
+                  5.verticalSpace,
+                  Container(
+                    width: 380,
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6)),
+                      shadows: [
+                        BoxShadow(
+                          color: Color(0x19000000),
+                          blurRadius: 8,
+                          offset: Offset(4, 3),
+                          spreadRadius: 0,
+                        )
+                      ],
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    child: TextField(
+                      controller: handphoneController,
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                        hintText: 'Masukan No. Handphone',
+                        hintStyle: NunitoTextStyle.fw400,
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  10.verticalSpace,
+                  Text(
+                    "Email",
+                    style: NunitoTextStyle.fw800.copyWith(fontSize: 16),
+                  ),
+                  5.verticalSpace,
+                  Container(
+                    width: 380,
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6)),
+                      shadows: [
+                        BoxShadow(
+                          color: Color(0x19000000),
+                          blurRadius: 8,
+                          offset: Offset(4, 3),
+                          spreadRadius: 0,
+                        )
+                      ],
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Masukan Email',
+                        hintStyle: NunitoTextStyle.fw400,
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  10.verticalSpace,
+                  Text(
+                    "Password",
+                    style: NunitoTextStyle.fw800.copyWith(fontSize: 16),
+                  ),
+                  5.verticalSpace,
+                  Container(
+                    width: 380,
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6)),
+                      shadows: [
+                        BoxShadow(
+                          color: Color(0x19000000),
+                          blurRadius: 8,
+                          offset: Offset(4, 3),
+                          spreadRadius: 0,
+                        )
+                      ],
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    child: TextField(
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                        hintText: 'Masukan Password',
+                        hintStyle: NunitoTextStyle.fw400,
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 8),
                   SizedBox(height: 20),
                   buildJoinButton(),
                 ],
               ),
             ),
+            50.verticalSpace,
             buildPlatformByContainer(),
           ],
         ),
       ),
-    );
-  }
-
-  Widget buildTextField(String label, TextInputType keyboardType,
-      {bool isPassword = false}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.fromLTRB(0, 8, 8, 1),
-          child: Text(
-            label,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 14,
-              fontFamily: 'NunitoBold',
-            ),
-          ),
-        ),
-        SizedBox(height: 5),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                color: Color(0x19000000),
-                blurRadius: 8,
-                offset: Offset(4, 3),
-                spreadRadius: 0,
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(14, 0.5, 0.5, 0.5),
-            child: TextField(
-              keyboardType: keyboardType,
-              obscureText: isPassword,
-              decoration: InputDecoration(
-                hintText: isPassword ? 'Masukkan Password' : 'Masukkan $label',
-                hintStyle: TextStyle(
-                  fontFamily: 'NunitoReg',
-                  color: Color.fromARGB(255, 170, 170, 170),
-                ),
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(vertical: 2),
-                suffixIcon: isPassword
-                    ? Padding(
-                        padding: EdgeInsets.only(right: 10.0),
-                        child: Icon(Icons.visibility_off_outlined),
-                      )
-                    : null,
-                suffixIconConstraints: BoxConstraints(
-                  minWidth: 20,
-                  minHeight: 20,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 
@@ -198,7 +284,10 @@ class InviteView extends StatelessWidget {
           type: MaterialType.transparency,
           child: InkWell(
             onTap: () {
-              Get.toNamed(Routes.signInRoute);
+              invitation(
+                handphoneController.text.toString(),
+                passwordController.text.toString(),
+              );
             },
             splashColor:
                 Color(0xFF6454F0), // Set a distinct color for the splash effect
@@ -259,7 +348,7 @@ class InviteView extends StatelessWidget {
                 alignment: Alignment.center,
                 children: [
                   Positioned(
-                    child: Image.asset('assets/Gram.png'),
+                    child: Image.asset('assets/images/Gram.png'),
                   ),
                 ],
               ),
@@ -276,7 +365,7 @@ class InviteView extends StatelessWidget {
                 alignment: Alignment.center,
                 children: [
                   Positioned(
-                    child: Image.asset('assets/Text.png'),
+                    child: Image.asset('assets/images/Text.png'),
                   ),
                 ],
               ),

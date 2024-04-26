@@ -22,8 +22,8 @@ class NewPassView extends StatelessWidget {
               height: 290,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                  begin: Alignment(-1.3, -1),
+                  end: Alignment(1, 0.44),
                   colors: [Color(0xFF6EE2F5), Color(0xFF6454F0)],
                 ),
                 borderRadius: BorderRadius.only(
@@ -232,9 +232,9 @@ class NewPassView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/Gram.png', width: 30, height: 30),
+              Image.asset('assets/images/Gram.png', width: 30, height: 30),
               SizedBox(width: 10),
-              Image.asset('assets/Text.png', width: 66, height: 9),
+              Image.asset('assets/images/Text.png', width: 66, height: 9),
             ],
           ),
           SizedBox(height: 5),

@@ -1,14 +1,46 @@
-// auth_view.dart
-
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:get/get.dart' hide Response;
+import 'package:http/http.dart';
 import 'package:venturo_core/configs/routes/route.dart';
+import 'package:venturo_core/features/admin_dashboard/view/ui/admin_dashboard_screen.dart';
+import 'package:venturo_core/features/dashboard/view/ui/dashboard_screen.dart';
+import 'package:venturo_core/shared/styles/google_text_style.dart';
 
-class SignInScreen extends StatelessWidget {
-  const SignInScreen({Key? key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({Key? key}) : super(key: key);
 
+  @override
+  _SignInScreenState createState() => _SignInScreenState();
+}
+
+TextEditingController handphoneController = TextEditingController();
+TextEditingController passwordController = TextEditingController();
+void login(String phone_number, String password) async {
+  try {
+    Response response = await post(
+      Uri.parse('https://rtonline-api.venturo.pro/api/v1/auth/login'),
+      body: {'phone_number': phone_number, 'password': password},
+    );
+    if (response.statusCode == 200 &&
+        passwordController.text.isNotEmpty &&
+        handphoneController.text.isNotEmpty) {
+      // Login berhasil
+      print('Login Berhasil');
+      Get.to(AdminDashboardScreen());
+    } else {
+      // Login gagal
+      Get.snackbar("Error", "Login Gagal");
+    }
+  } catch (e) {
+    print('Error: ${e.toString()}');
+  }
+}
+
+class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,8 +53,8 @@ class SignInScreen extends StatelessWidget {
               height: 290,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                  begin: Alignment(-1.3, -1),
+                  end: Alignment(1, 0.44),
                   colors: [Color(0xFF6EE2F5), Color(0xFF6454F0)],
                 ),
                 borderRadius: BorderRadius.only(
@@ -79,10 +111,68 @@ class SignInScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  buildTextField('No. Handphone', TextInputType.phone),
-                  SizedBox(height: 10),
-                  buildTextField('Password', TextInputType.visiblePassword,
-                      isPassword: true),
+                  Text(
+                    "No. Handphone",
+                    style: NunitoTextStyle.fw800.copyWith(fontSize: 16),
+                  ),
+                  5.verticalSpace,
+                  Container(
+                    width: 380,
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6)),
+                      shadows: [
+                        BoxShadow(
+                          color: Color(0x19000000),
+                          blurRadius: 8,
+                          offset: Offset(4, 3),
+                          spreadRadius: 0,
+                        )
+                      ],
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    child: TextField(
+                      controller: handphoneController,
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                        hintText: 'Masukan No. Handphone',
+                        hintStyle: NunitoTextStyle.fw400,
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  10.verticalSpace,
+                  Text(
+                    "Password",
+                    style: NunitoTextStyle.fw800.copyWith(fontSize: 16),
+                  ),
+                  5.verticalSpace,
+                  Container(
+                    width: 380,
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6)),
+                      shadows: [
+                        BoxShadow(
+                          color: Color(0x19000000),
+                          blurRadius: 8,
+                          offset: Offset(4, 3),
+                          spreadRadius: 0,
+                        )
+                      ],
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    child: TextField(
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                        hintText: 'Masukan Password',
+                        hintStyle: NunitoTextStyle.fw400,
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
                   SizedBox(height: 8),
                   buildForgotPassword(),
                   SizedBox(height: 20),
@@ -98,71 +188,11 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  Widget buildTextField(String label, TextInputType keyboardType,
-      {bool isPassword = false}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.fromLTRB(0, 8, 8, 1),
-          child: Text(
-            label,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 14,
-              fontFamily: 'NunitoBold',
-            ),
-          ),
-        ),
-        SizedBox(height: 5),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                color: Color(0x19000000),
-                blurRadius: 8,
-                offset: Offset(4, 3),
-                spreadRadius: 0,
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(14, 0.5, 0.5, 0.5),
-            child: TextField(
-              keyboardType: keyboardType,
-              obscureText: isPassword,
-              decoration: InputDecoration(
-                hintText: isPassword ? 'Masukkan Password' : 'Masukkan $label',
-                hintStyle: TextStyle(
-                  fontFamily: 'NunitoReg',
-                  color: Color.fromARGB(255, 170, 170, 170),
-                ),
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(vertical: 2),
-                suffixIcon: isPassword
-                    ? Padding(
-                        padding: EdgeInsets.only(right: 10.0),
-                        child: Icon(Icons.visibility_off_outlined),
-                      )
-                    : null,
-                suffixIconConstraints: BoxConstraints(
-                  minWidth: 20,
-                  minHeight: 20,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget buildForgotPassword() {
     return GestureDetector(
       onTap: () {
         // Navigate to the forgot password page
+
         Get.toNamed(Routes.forgotPassRoute);
       },
       child: Container(
@@ -200,7 +230,8 @@ class SignInScreen extends StatelessWidget {
           type: MaterialType.transparency,
           child: InkWell(
             onTap: () {
-              Get.toNamed(Routes.dashboardRoute);
+              login(handphoneController.text.toString(),
+                  passwordController.text.toString());
             },
             splashColor:
                 Color(0xFF6454F0), // Set a distinct color for the splash effect
@@ -254,7 +285,7 @@ class SignInScreen extends StatelessWidget {
               width: 30,
               height: 30,
               child: Stack(children: [
-                Positioned(child: Image.asset('assets/Gram.png'))
+                Positioned(child: Image.asset('assets/images/Gram.png'))
               ]),
             ),
           ),
@@ -265,7 +296,7 @@ class SignInScreen extends StatelessWidget {
               width: 66,
               height: 9,
               child: Stack(children: [
-                Positioned(child: Image.asset('assets/Text.png'))
+                Positioned(child: Image.asset('assets/images/Text.png'))
               ]),
             ),
           ),

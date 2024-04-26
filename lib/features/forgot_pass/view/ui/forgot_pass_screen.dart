@@ -22,8 +22,8 @@ class ForgotView extends StatelessWidget {
               height: 290,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                  begin: Alignment(-1.3, -1),
+                  end: Alignment(1, 0.44),
                   colors: [Color(0xFF6EE2F5), Color(0xFF6454F0)],
                 ),
                 borderRadius: BorderRadius.only(
@@ -244,7 +244,7 @@ class ForgotView extends StatelessWidget {
               width: 30,
               height: 30,
               child: Stack(children: [
-                Positioned(child: Image.asset('assets/Gram.png'))
+                Positioned(child: Image.asset('assets/images/Gram.png'))
               ]),
             ),
           ),
@@ -255,7 +255,7 @@ class ForgotView extends StatelessWidget {
               width: 66,
               height: 9,
               child: Stack(children: [
-                Positioned(child: Image.asset('assets/Text.png'))
+                Positioned(child: Image.asset('assets/images/Text.png'))
               ]),
             ),
           ),
